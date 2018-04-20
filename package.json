@@ -1,0 +1,28 @@
+{
+  "name": "spice-up-js",
+  "version": "0.0.1",
+  "description": "Demo app showing how to implement singleton like objects in Express, with currying and high-order functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodersPen/spice-up-js.git"
+  },
+  "keywords": [
+    "Express",
+    "Currying",
+    "High-Order",
+    "Functions",
+    "Demo",
+    "App",
+    "Tutorial"
+  ],
+  "author": "Leonardo Graterol (@pankas87)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodersPen/spice-up-js/issues"
+  },
+  "homepage": "https://github.com/CodersPen/spice-up-js#readme"
+}
