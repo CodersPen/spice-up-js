@@ -57,7 +57,8 @@
             "ignoreStrings": true
         }],
         "max-params": ["warn", 4],
-        "func-style": ["error", "expression"]
+        "func-style": ["error", "expression"],
+        "no-console": "off"
     },
     "settings": {
         "import/resolver": {
