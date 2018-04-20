@@ -4,6 +4,7 @@
   "description": "Demo app showing how to implement singleton like objects in Express, with currying and high-order functions",
   "main": "index.js",
   "scripts": {
+    "prestart": "babel src -d build",
     "start": "node ./build/index.js"
   },
   "repository": {
@@ -23,5 +24,16 @@
   "bugs": {
     "url": "https://github.com/CodersPen/spice-up-js/issues"
   },
-  "homepage": "https://github.com/CodersPen/spice-up-js#readme"
+  "homepage": "https://github.com/CodersPen/spice-up-js#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-watch": "^3.1.4"
+  }
 }
