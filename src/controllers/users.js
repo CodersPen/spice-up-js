@@ -1,12 +1,14 @@
 import { OK } from 'http-status';
+import { fetchUsers } from '../services/users';
 
-const usersIndex = function UsersIndex(req, res, next) {
-    res.status(OK);
-    res.send([
-        { name: 'Leonardo' },
-        { name: 'Carlos' }
-    ]);
+const listUsers = function ListUsers(req, res, next) {
+    const usersPromise = fetchUsers();
+
+    usersPromise.then((users) => {
+        res.status(OK);
+        res.send(users);
+    });
     return next();
 };
 
-export default { usersIndex };
+export default { listUsers };

@@ -1,8 +1,8 @@
 import Express from 'express';
-import { usersIndex } from './controllers/users';
+import { listUsers } from './controllers/users';
 
 const app = new Express();
 
-app.get('/users', usersIndex);
+app.get('/users', listUsers);
 
 export default app;
