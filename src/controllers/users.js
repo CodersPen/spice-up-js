@@ -1,4 +1,4 @@
-import { OK, NOT_FOUND } from 'http-status';
+import { OK, INTERNAL_SERVER_ERROR, NOT_FOUND } from 'http-status';
 import Logger from '../helpers/logger';
 import { fetchUsers, fetchUser } from '../services/users';
 
@@ -19,12 +19,17 @@ const listUsers = function ListUsers(req, res) {
 };
 
 const getUser = function GetUser(req, res) {
-    const userPromise = fetchUser(req.params.id);
+    const logger = new Logger(req.headers);
+
+    logger.info('action=getUser description=begin');
+    const userPromise = fetchUser(req.params.id, req.headers);
 
     userPromise.then((user) => {
         res.status(OK);
         res.send(user);
+        logger.info(`action=getUser description=success message="User with ID:${req.params.id} found"`);
     }).catch((error) => {
+        logger.error(`action=getUser description=error message="${error.message}"`);
         res.sendStatus(NOT_FOUND);
     });
 };
