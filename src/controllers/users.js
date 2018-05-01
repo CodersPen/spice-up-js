@@ -21,7 +21,7 @@ const listUsers = function ListUsers(req, res) {
 const getUser = logger =>
     function GetUser(req, res) {
         logger.info('action=getUser description=begin');
-        const userPromise = fetchUser(req.params.id, req.headers);
+        const userPromise = fetchUser(logger)(req.params.id, req.headers);
 
         userPromise.then((user) => {
             res.status(OK);

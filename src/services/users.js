@@ -33,21 +33,20 @@ const fetchUsers = function FetchUsers(headers) {
     return users;
 };
 
-const fetchUser = function FetchUser(id, headers) {
-    return new Promise((resolve, reject) => {
-        const logger = new Logger(headers);
+const fetchUser = logger =>
+    function FetchUser(id) {
+        return new Promise((resolve, reject) => {
+            logger.info('action=fetchUser description=begin');
 
-        logger.info('action=fetchUser description=begin');
+            const user = usersList[id - 1];
 
-        const user = usersList[id - 1];
-
-        if (user) {
-            logger.info('action=fetchUsers description=success');
-            resolve(user);
-        }
-        logger.error(`action=fetchUser description=error message="User with ID:${id} found"`);
-        reject(new Error(`User with ID:${id} not found`));
-    });
-};
+            if (user) {
+                logger.info('action=fetchUsers description=success');
+                resolve(user);
+            }
+            logger.error(`action=fetchUser description=error message="User with ID:${id} not found"`);
+            reject(new Error(`User with ID:${id} not found`));
+        });
+    };
 
 export default { fetchUsers, fetchUser };
