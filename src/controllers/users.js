@@ -1,4 +1,4 @@
-import { OK } from 'http-status';
+import { OK, INTERNAL_SERVER_ERROR } from 'http-status';
 import { fetchUsers } from '../services/users';
 
 const listUsers = function ListUsers(req, res, next) {
@@ -7,6 +7,8 @@ const listUsers = function ListUsers(req, res, next) {
     usersPromise.then((users) => {
         res.status(OK);
         res.send(users);
+    }).catch((error) => {
+        res.sendStatus(INTERNAL_SERVER_ERROR);
     });
     return next();
 };
