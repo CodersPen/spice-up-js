@@ -18,20 +18,19 @@ const listUsers = function ListUsers(req, res) {
     });
 };
 
-const getUser = function GetUser(req, res) {
-    const logger = new Logger(req.headers);
+const getUser = logger =>
+    function GetUser(req, res) {
+        logger.info('action=getUser description=begin');
+        const userPromise = fetchUser(req.params.id, req.headers);
 
-    logger.info('action=getUser description=begin');
-    const userPromise = fetchUser(req.params.id, req.headers);
-
-    userPromise.then((user) => {
-        res.status(OK);
-        res.send(user);
-        logger.info(`action=getUser description=success message="User with ID:${req.params.id} found"`);
-    }).catch((error) => {
-        logger.error(`action=getUser description=error message="${error.message}"`);
-        res.sendStatus(NOT_FOUND);
-    });
-};
+        userPromise.then((user) => {
+            res.status(OK);
+            res.send(user);
+            logger.info(`action=getUser description=success message="User with ID:${req.params.id} found"`);
+        }).catch((error) => {
+            logger.error(`action=getUser description=error message="${error.message}"`);
+            res.sendStatus(NOT_FOUND);
+        });
+    };
 
 export default { listUsers, getUser };
