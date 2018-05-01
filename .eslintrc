@@ -58,7 +58,8 @@
         }],
         "max-params": ["warn", 4],
         "func-style": ["error", "expression"],
-        "no-console": "off"
+        "no-console": "off",
+        "object-curly-newline": "off"
     },
     "settings": {
         "import/resolver": {
