@@ -6,7 +6,7 @@ const listUsers = function ListUsers(req, res, next) {
     const logger = new Logger(req.headers);
 
     logger.info('action=listUsers description=begin');
-    const usersPromise = fetchUsers();
+    const usersPromise = fetchUsers(req.headers);
 
     usersPromise.then((users) => {
         res.status(OK);
