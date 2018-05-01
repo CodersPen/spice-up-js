@@ -11,17 +11,15 @@ const formatter = headers => options =>
     `${headers !== undefined ? expandHeaders(headers) : ''}` +
     `${(undefined !== options.message ? `, ${options.message}` : '')}`;
 
-export default class Logger {
-    constructor(headers) {
-        return new (winston.Logger)({
-            levels,
-            transports: [
-                new (winston.transports.Console)({
-                    timestamp,
-                    formatter: formatter(headers),
-                    level: 'debug'
-                })
-            ]
-        });
-    }
+export default function initialize(headers) {
+    return new (winston.Logger)({
+        levels,
+        transports: [
+            new (winston.transports.Console)({
+                timestamp,
+                formatter: formatter(headers),
+                level: 'debug'
+            })
+        ]
+    });
 }
