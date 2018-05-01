@@ -1,5 +1,3 @@
-import Logger from '../helpers/logger';
-
 const usersList = [
     { name: 'Leonardo' },
     { name: 'Carlos' },
@@ -15,23 +13,22 @@ const usersList = [
     { name: 'Carla' }
 ];
 
-const fetchUsers = function FetchUsers(headers) {
-    const logger = new Logger(headers);
+const fetchUsers = logger =>
+    function FetchUsers() {
+        logger.info('action=fetchUsers description=begin');
 
-    logger.info('action=fetchUsers description=begin');
+        const users = Promise.resolve(usersList);
 
-    const users = Promise.resolve(usersList);
+        users.then(() => {
+            logger.info('action=fetchUsers description=success');
+        });
 
-    users.then(() => {
-        logger.info('action=fetchUsers description=success');
-    });
+        users.catch((error) => {
+            logger.error(`action=fetchUsers description=error message=${error.message}`);
+        });
 
-    users.catch((error) => {
-        logger.error(`action=fetchUsers description=error message=${error.message}`);
-    });
-
-    return users;
-};
+        return users;
+    };
 
 const fetchUser = logger =>
     function FetchUser(id) {
@@ -41,11 +38,12 @@ const fetchUser = logger =>
             const user = usersList[id - 1];
 
             if (user) {
-                logger.info('action=fetchUsers description=success');
+                logger.info('action=fetchUser description=success');
                 resolve(user);
+            } else {
+                logger.error(`action=fetchUser description=error message="User with ID:${id} not found"`);
+                reject(new Error(`User with ID:${id} not found`));
             }
-            logger.error(`action=fetchUser description=error message="User with ID:${id} not found"`);
-            reject(new Error(`User with ID:${id} not found`));
         });
     };
 

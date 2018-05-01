@@ -4,7 +4,7 @@ import { listUsers, getUser } from './controllers/users';
 
 const app = new Express();
 
-app.get('/users', listUsers);
+app.get('/users', controllerInitializer(listUsers));
 app.get('/users/:id', controllerInitializer(getUser));
 
 export default app;
