@@ -2,7 +2,17 @@ import Logger from '../helpers/logger';
 
 const usersList = [
     { name: 'Leonardo' },
-    { name: 'Carlos' }
+    { name: 'Carlos' },
+    { name: 'Diana' },
+    { name: 'Andrés' },
+    { name: 'Julia' },
+    { name: 'Camilo' },
+    { name: 'Daniel' },
+    { name: 'Damián' },
+    { name: 'Danilo' },
+    { name: 'Jaime' },
+    { name: 'Constanza' },
+    { name: 'Carla' }
 ];
 
 const fetchUsers = function FetchUsers(headers) {
@@ -25,7 +35,7 @@ const fetchUsers = function FetchUsers(headers) {
 
 const fetchUser = function FetchUser(id) {
     return new Promise((resolve, reject) => {
-        const user = usersList[id];
+        const user = usersList[id - 1];
 
         if (user) {
             resolve(user);

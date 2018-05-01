@@ -1,8 +1,8 @@
-import { OK, INTERNAL_SERVER_ERROR } from 'http-status';
+import { OK, NOT_FOUND } from 'http-status';
 import Logger from '../helpers/logger';
-import { fetchUsers } from '../services/users';
+import { fetchUsers, fetchUser } from '../services/users';
 
-const listUsers = function ListUsers(req, res, next) {
+const listUsers = function ListUsers(req, res) {
     const logger = new Logger(req.headers);
 
     logger.info('action=listUsers description=begin');
@@ -16,7 +16,17 @@ const listUsers = function ListUsers(req, res, next) {
         res.sendStatus(INTERNAL_SERVER_ERROR);
         logger.error(`action=listUsers description=error message=${error.message}`);
     });
-    return next();
 };
 
-export default { listUsers };
+const getUser = function GetUser(req, res) {
+    const userPromise = fetchUser(req.params.id);
+
+    userPromise.then((user) => {
+        res.status(OK);
+        res.send(user);
+    }).catch((error) => {
+        res.sendStatus(NOT_FOUND);
+    });
+};
+
+export default { listUsers, getUser };
